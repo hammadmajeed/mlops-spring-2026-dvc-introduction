@@ -42,8 +42,10 @@ jobs:
           # Commit and Push the image (Fixes the "Detached HEAD" error)
           git add -f by_region.png
           git commit -m "chore: update plot [skip ci]" || echo "No changes"
-          git push origin HEAD:${{ github.head_ref }}
-          
+
+          # 1. Pull the latest changes from the branch to sync up
+          git pull origin ${{ github.head_ref }} --rebase
+          git push origin HEAD:${{ github.head_ref }}       
           git fetch --prune
           ls -l
       - name: Post Comment
