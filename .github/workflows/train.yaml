@@ -42,7 +42,8 @@ jobs:
           # Commit and Push the image (Fixes the "Detached HEAD" error)
           git add -f by_region.png report.md          
           git commit -m "chore: update plot [skip ci]" || echo "No changes"
-
+          # 2. STASH everything else (this clears the "unstaged changes" error)
+          git stash
           # 1. Pull the latest changes from the branch to sync up
           git pull origin ${{ github.head_ref }} --rebase
           git push origin HEAD:${{ github.head_ref }}       
