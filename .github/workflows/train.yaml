@@ -46,7 +46,7 @@ jobs:
           git stash
           # 1. Pull the latest changes from the branch to sync up
           git pull origin ${{ github.head_ref }} --rebase
-          git push origin HEAD:${{ github.head_ref }}       
+          git push origin HEAD:${{ github.head_ref }} --force       
           git fetch --prune
           ls -l
       - name: Post Comment
