@@ -26,7 +26,5 @@ jobs:
           make install 
           dvc repro
           git fetch --prune
-          dvc metrics diff --targets metrics.json --show-json > metrics_diff.json
-          echo "Metrics Diff:"
-          cat metrics_diff.json
+          dvc metrics diff 
           
