@@ -27,6 +27,7 @@ jobs:
           make install 
           dvc repro
           git fetch --prune
+          ls -l
           echo "### 📊 Analysis for ${{ github.sha }}" > report.md
           dvc metrics diff  >> report.md
           echo "### Region wise plot" >> report.md
