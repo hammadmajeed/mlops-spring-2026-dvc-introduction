@@ -40,7 +40,7 @@ jobs:
           echo "![Region Plot](by_region.png)" >> report.md
         
           # Commit and Push the image (Fixes the "Detached HEAD" error)
-          git add -f by_region.png
+          git add -f by_region.png report.md          
           git commit -m "chore: update plot [skip ci]" || echo "No changes"
 
           # 1. Pull the latest changes from the branch to sync up
