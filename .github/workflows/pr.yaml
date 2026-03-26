@@ -1,0 +1,25 @@
+name: PR Report
+on:
+  pull_request:
+
+jobs:
+  comment-report:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write # Required to post comments
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Create Markup Document
+        run: |
+          echo "### 📊 Analysis for ${{ github.sha }}" > report.md
+          echo "| Metric | Value |" >> report.md
+          echo "| --- | --- |" >> report.md
+          echo "| Errors | 0 |" >> report.md
+          echo "| Warnings | 2 |" >> report.md
+
+      - name: Post Comment
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          path: report.md
