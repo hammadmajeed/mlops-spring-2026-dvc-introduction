@@ -15,6 +15,8 @@ df = pd.read_csv("data_processed.csv")
 
 #### Get features ready to model! 
 y = df.pop("cons_general").to_numpy()
+# Create a copy so you can modify the values
+y = y.copy()
 y[y< 4] = 0
 y[y>= 4] = 1
 
