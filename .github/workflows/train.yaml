@@ -37,8 +37,7 @@ jobs:
           echo "### 📊 Analysis for ${{ github.sha }}" > report.md
           dvc metrics diff >> report.md
           echo "### Region wise plot" >> report.md
-          echo "![Region Plot](by_region.png)" >> report.md
-        
+          echo "![Region Plot](https://raw.githubusercontent.com/${{ github.repository }}/${{ github.head_ref }}/by_region.png)" >> report.md        
           # Commit and Push the image (Fixes the "Detached HEAD" error)
           git add -f by_region.png report.md          
           git commit -m "chore: update plot [skip ci]" || echo "No changes"
