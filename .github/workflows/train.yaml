@@ -1,5 +1,6 @@
 name: DVC Tracking with Github Actions
-on: [pull request]
+on: 
+  pull_request
 jobs:
   report:
     runs-on: ubuntu-latest
