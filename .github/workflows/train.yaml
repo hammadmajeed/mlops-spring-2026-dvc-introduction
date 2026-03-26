@@ -30,7 +30,7 @@ jobs:
           echo "### 📊 Analysis for ${{ github.sha }}" > report.md
           dvc metrics diff  >> report.md
           echo "### Region wise plot" >> report.md
-          echo ![Region Plot](by_region.png) >> report.md
+          echo "![Region Plot](by_region.png)" >> report.md
       - name: Post Comment
         uses: marocchino/sticky-pull-request-comment@v2
         with:
