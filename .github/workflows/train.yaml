@@ -26,5 +26,11 @@ jobs:
           make install 
           dvc repro
           git fetch --prune
-          dvc metrics diff 
+          echo "### 📊 Analysis for ${{ github.sha }}" > report.md
+          dvc metrics diff  >> report.md
+      - name: Post Comment
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          path: report.md
+        
           
