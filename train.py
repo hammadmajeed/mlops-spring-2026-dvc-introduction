@@ -50,6 +50,7 @@ score_int = [int(s) for s in score]
 df['pred_accuracy'] = score_int
 
 # Bar plot by region
+# this line is added to show that this is different code than the master branch
 
 sns.set_color_codes("dark")
 ax = sns.barplot(x="region", y="pred_accuracy", data=df, legend=False)
