@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Generate Report
         run: |
@@ -17,7 +17,7 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Running_updates
         env: 
           GH_TOKEN: ${{ github.token }}
