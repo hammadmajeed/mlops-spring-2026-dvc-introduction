@@ -7,7 +7,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
-
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      
       - name: Generate Report
         run: |
           echo "## Build Report 🚀" >> $GITHUB_STEP_SUMMARY
@@ -26,17 +29,23 @@ jobs:
         run: |
           make install 
           dvc repro
+          # Configure Git
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+        
+          # Generate the report
+          echo "### 📊 Analysis for ${{ github.sha }}" > report.md
+          dvc metrics diff >> report.md
+          echo "### Region wise plot" >> report.md
+          echo "![Region Plot](by_region.png)" >> report.md
+        
+          # Commit and Push the image (Fixes the "Detached HEAD" error)
           git add -f by_region.png
-          git commit -m "chore: update region plot [skip ci]" || echo "No changes to commit"
-          git push
+          git commit -m "chore: update plot [skip ci]" || echo "No changes"
+          git push origin HEAD:${{ github.head_ref }}
+          
           git fetch --prune
           ls -l
-          echo "### 📊 Analysis for ${{ github.sha }}" > report.md
-          dvc metrics diff  >> report.md
-          echo "### Region wise plot" >> report.md
-          cml publish by_region.png --md >> report.md
       - name: Post Comment
         uses: marocchino/sticky-pull-request-comment@v2
         with:
